@@ -1,4 +1,4 @@
-import React from "react"
+import React from 'react';
 
 const LogoIcon = ( {fill="#EA4B33"} ) => {
     return (
