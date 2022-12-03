@@ -18,9 +18,9 @@ const RegistrationIcon = ( {fill="#fff"} ) => {
                 16.8826 4.75736 15.7574C5.88258 14.6321 7.4087 14 9 14C10.5913 14 12.1174 
                 14.6321 13.2426 15.7574C14.3679 16.8826 15 18.4087 15 20V21H3V20Z" 
                 stroke={fill} 
-                stroke-width="2" 
-                stroke-linecap="round" 
-                stroke-linejoin="round"
+                strokeWidth="2" 
+                strokeLinecap="round" 
+                strokeLinejoin="round"
             />
         </svg>
     )

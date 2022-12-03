@@ -1,0 +1,36 @@
+.ListMovieItem {
+    display: flex;
+    flex-direction: column;
+    margin: 1%;
+    margin-bottom: 20px;
+    width: 220px;
+    min-height: 300px;
+    box-sizing: border-box;
+
+    & a {
+        border-radius: 10px;
+        transition: all .5s;
+    }
+
+    & a:hover {
+        transform: scale(1.1);
+    }
+
+    .ImgPoster {
+        height: 330px;
+        width: 220px;
+        border-radius: 10px;
+        box-sizing: border-box;
+    }
+
+    .ItemContent {
+        display: flex;
+        flex-direction: column;
+        gap: 5px;
+        padding: 20px 10px 10px;
+    
+        & a:hover {
+            color: #EA4B33;
+        }
+    }
+}
