@@ -1,9 +1,9 @@
 import React from 'react';
-import './ListMovieItem.scss';
+import './SlideItem.scss';
 
 const URL_IMAGES_SMALL = process.env.REACT_APP_URL_IMAGES_SMALL
 
-const ListMovieItem = ({ 
+const SlideItem = ({ 
     id,
     title,
     poster_path,
@@ -12,12 +12,12 @@ const ListMovieItem = ({
  }) =>  {
 
     return (
-        <li className="ListMovieItem">
+        <div className="SlideItem">
             <a href="#">
                 <img 
                     className="ImgPoster" 
                     src={`${URL_IMAGES_SMALL}${poster_path}`} 
-                    alt="Poster" 
+                    alt="Poster"
                 />
             </a>
             <div className="ItemContent">
@@ -25,8 +25,8 @@ const ListMovieItem = ({
                 <p>{release_date}</p>
                 <p>{vote_average}</p>
             </div>
-        </li>
+        </div>
     )
  }
 
-export default ListMovieItem
+export default SlideItem
