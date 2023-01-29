@@ -1,5 +1,5 @@
 import React from 'react';
-import './ListMovieItem.scss';
+import './ListMoviesItem.scss';
 
 const URL_IMAGES_SMALL = process.env.REACT_APP_URL_IMAGES_SMALL
 
@@ -25,7 +25,7 @@ const ListMovieItem = ({
                 <p>{release_date}</p>
                 <p>{vote_average}</p>
             </div>
-        </li>
+        </li>       
     )
  }
 

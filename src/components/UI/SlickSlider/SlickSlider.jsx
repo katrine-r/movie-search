@@ -1,11 +1,10 @@
 import React from 'react';
-import Slider from "react-slick";
-
-import "./slick.css"; 
-import "./slick-theme.css";
+import Slider from 'react-slick';
+import './slick.css'; 
+import './slick-theme.css';
 import SlideItem from '../SlideItem/SlideItem';
 
-const SlickSlider = ({ movies }) => {
+const SlickSlider = ({ movies, tvShows }) => {
     const settings = {
         dots: false,
         infinite: true,
@@ -63,6 +62,19 @@ const SlickSlider = ({ movies }) => {
                     title={i.title}
                     poster_path={i.poster_path}
                     release_date={i.release_date}
+                    vote_average={i.vote_average}
+                />
+              </div>
+          ))
+          }
+          { tvShows?.map((i, index) => (
+              <div key={i.id} className="SlideItem">
+                <SlideItem
+                    key={i.id}
+                    id={i.id}
+                    title={i.name}
+                    poster_path={i.poster_path}
+                    release_date={i.first_air_date}
                     vote_average={i.vote_average}
                 />
               </div>

@@ -5,19 +5,18 @@
 .slick-next {
     font-size: 0;
     line-height: 0;
-
     position: absolute;
     top: 50%;
-
     display: block;
     width: 24px;
     height: 24px;
     padding: 0;
+
     -webkit-transform: translate(0, -50%);
     -ms-transform: translate(0, -50%);
     transform: translate(0, -50%);
-    cursor: pointer;
 
+    cursor: pointer;
     color: #fff;
     border: none;
     outline: none;
@@ -52,6 +51,7 @@
     line-height: 1;
     opacity: .75;
     color: white;
+    
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
 }

@@ -3,9 +3,12 @@ const TOKEN = process.env.REACT_APP_TOKEN
 
 class MovieService {
 
+    // MOVIES requests
+
     static async getPopularMovies() {
         try {
-            const response = await fetch(`${API_URL}/movie/popular?api_key=${TOKEN}`,
+            // const response = await fetch(`${API_URL}/movie/popular?api_key=${TOKEN}&page=${3}`,
+            const response = await fetch(`${API_URL}/movie/popular?api_key=${TOKEN}&language=ru-RU`,
                 {
                     headers: {
                         'accept': 'application/json'
@@ -23,7 +26,7 @@ class MovieService {
 
     static async getUpcomingMovies() {
         try {
-            const response = await fetch(`${API_URL}/movie/upcoming?api_key=${TOKEN}`,
+            const response = await fetch(`${API_URL}/movie/upcoming?api_key=${TOKEN}&language=ru-RU`,
                 {
                     headers: {
                         'accept': 'application/json' 
@@ -42,7 +45,7 @@ class MovieService {
 
     static async getNowPlayingMovies() {
         try {
-            const response = await fetch(`${API_URL}/movie/now_playing?api_key=${TOKEN}`,
+            const response = await fetch(`${API_URL}/movie/now_playing?api_key=${TOKEN}&language=ru-RU`,
                 {
                     headers: {
                         'accept': 'aplication/json'
@@ -54,6 +57,26 @@ class MovieService {
             return movies
         }
         catch(error) {
+            console.log("Error ", error)
+        }
+    }
+
+    // TV Shows requests
+
+    static async getPopularTVShows() {
+        try {
+            const response = await fetch(`${API_URL}/tv/popular?api_key=${TOKEN}&language=ru-RU`,
+                {
+                    headers: {
+                        'accept': 'application/json'
+                      }
+                }
+            )
+            const tvShows = await response.json()
+            console.log(tvShows)
+            return tvShows
+        }
+        catch (error) {
             console.log("Error ", error)
         }
     }

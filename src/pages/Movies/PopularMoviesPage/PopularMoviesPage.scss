@@ -1,0 +1,29 @@
+.PopularMoviesPage {
+    display: flex;
+    justify-content: center;
+    padding: 50px 30px;
+    background-color: #15151A;
+    height: max-content;
+
+    .MovieWrapper {
+        width: 92%;
+
+        .PopularMovies {
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .TitleWrapper {
+            padding-bottom: 20px;
+
+            & a {
+                transition: all .5s;
+            }
+
+            & a:hover {
+                color: #EA4B33;
+            }
+        }
+    }
+}

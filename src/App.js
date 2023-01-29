@@ -1,8 +1,9 @@
 import React from 'react';
 import './App.css';
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 import Layout from './hoc/Layout/Layout';
-import MovieSearchPage from './pages/MovieSearch/MovieSearchPage';
+import MovieSearchHomePage from './pages/MovieSearchHomePage/MovieSearchHomePage';
+import PopularMoviesPage from './pages/Movies/PopularMoviesPage/PopularMoviesPage'
 
 function App() {
   return (
@@ -10,8 +11,10 @@ function App() {
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<Layout />}>
-            <Route index element={<MovieSearchPage />} />
+            <Route index element={<MovieSearchHomePage />} />
+            <Route path="/popular-movies" element={<PopularMoviesPage />} />
           </Route>
+          <Route path="*" element={<Navigate to={"/"} />} />
         </Routes>
       </BrowserRouter>
     </div>

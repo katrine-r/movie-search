@@ -1,12 +1,12 @@
 import React from 'react';
-import './ListMovie.scss';
-import ListMovieItem from './ListMovieItem/ListMovieItem';
+import './ListMovies.scss';
+import ListMoviesItem from './ListMoviesItem/ListMoviesItem';
 
 const ListMovie = ({ movies }) => {
     return (
-        <ul className="ListMovie">
+        <ul className="ListMovies">
             { movies?.map((i, index) => (
-                <ListMovieItem
+                <ListMoviesItem
                     key={index}
                     id={i.id}
                     title={i.title}
