@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import './PopularMoviesPage.scss'
+import classes from './PopularMoviesPage.module.scss';
 import ListMovies from '../../../components/ListMovies/ListMovies';
 import { useDispatch, useSelector } from 'react-redux';
 import MovieService from '../../../api/MovieService';
@@ -9,7 +9,6 @@ import { getPopularMovies } from '../../../store/actions/moviesList';
 const PopularMoviesPage = () => {
 
     const dispatch = useDispatch()
-
     const { popularMovies } = useSelector((state) => state.moviesList)
 
     const onPopularMovies = async () => {
@@ -23,10 +22,10 @@ const PopularMoviesPage = () => {
     }, [])
 
     return (
-        <div className="PopularMoviesPage"> 
-            <div className="MovieWrapper">
-                <div className="PopularMovies">
-                    <div className="TitleWrapper">
+        <div className={classes.PopularMoviesPage}> 
+            <div className={classes.MovieWrapper}>
+                <div className={classes.PopularMovies}>
+                    <div className={classes.TitleWrapper}>
                         <h2>Популярные фильмы</h2>
                     </div>
                     <ListMovies movies={popularMovies} />

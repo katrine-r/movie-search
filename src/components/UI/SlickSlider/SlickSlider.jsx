@@ -55,7 +55,7 @@ const SlickSlider = ({ movies, tvShows }) => {
     return (
         <Slider {...settings}>
           { movies?.map((i, index) => (
-              <div key={i.id} className="SlideItem">
+              <div key={i.id}>
                 <SlideItem
                     key={i.id}
                     id={i.id}
@@ -65,10 +65,10 @@ const SlickSlider = ({ movies, tvShows }) => {
                     vote_average={i.vote_average}
                 />
               </div>
-          ))
+            ))
           }
           { tvShows?.map((i, index) => (
-              <div key={i.id} className="SlideItem">
+              <div key={i.id}>
                 <SlideItem
                     key={i.id}
                     id={i.id}
@@ -78,7 +78,7 @@ const SlickSlider = ({ movies, tvShows }) => {
                     vote_average={i.vote_average}
                 />
               </div>
-          ))
+            ))
           }
         </Slider>
     )

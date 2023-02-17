@@ -1,0 +1,65 @@
+.CardMoviePage {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    background-color: #15151A;
+    height: max-content;
+
+    .ImgPosterContainer {
+        display: flex;
+        justify-content: flex-end;
+        align-items: center;
+        position: relative;
+        height: 600px;
+        width: 100%;
+        overflow: hidden;
+        
+        .ImgPosterBackground {
+            display: flex;
+            justify-content: flex-end;
+            align-items: flex-start;
+            width: 100%;
+            overflow: hidden;
+            opacity: 0.4;
+        }
+    }
+
+    .ShortDescriptionCard {
+        display: flex;
+        justify-content: flex-start;
+        flex-direction: row;
+        position: absolute;
+        left: 50px;
+        top: 50px;
+
+        .ImgPoster {
+            height: 500px;
+            width: 330px;
+            border-radius: 10px;
+            box-sizing: border-box;
+        }
+
+        .Description {
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            flex-direction: column;
+            margin: 0 50px 0 30px;
+
+            .FactsMovie {
+                display: flex;
+                gap: 20px;
+                margin-top: 10px;
+            }
+
+            .Overview {
+                margin-top: 30px;
+
+                & p {
+                    margin: 10px 0;
+                }
+            }
+        }
+    }
+    
+}

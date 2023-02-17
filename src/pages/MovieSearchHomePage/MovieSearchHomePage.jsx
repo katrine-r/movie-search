@@ -1,5 +1,5 @@
 import React from 'react';
-import './MovieSearchHomePage.scss';
+import classes from './MovieSearchHomePage.module.scss';
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
@@ -52,26 +52,26 @@ const MovieSearch = () => {
     }, [])
 
     return (
-        <div className="MovieSearch">
-            <div className="MovieWrapper">
-                <div className="PopularMovies">
+        <div className={classes.MovieSearch}>
+            <div className={classes.MovieWrapper}>
+                <div className={classes.PopularMovies}>
 
-                    <div className="TitleWrapper">
+                    <div className={classes.TitleWrapper}>
                         <Link to="/popular-movies"><h2>Популярные фильмы</h2></Link>
                     </div>
                     <SlickSlider movies={popularMovies} />
 
-                    <div className="TitleWrapper">
+                    <div className={classes.TitleWrapper}>
                         <Link to="/"><h2>Популярные сериалы</h2></Link>
                     </div>
                     <SlickSlider tvShows={popularTVShows} />
 
-                    <div className="TitleWrapper">
+                    <div className={classes.TitleWrapper}>
                         <Link to="/"><h2>Скоро в прокате</h2></Link>
                     </div>
                     <SlickSlider movies={upcomingMovies} />
 
-                    <div className="TitleWrapper">
+                    <div className={classes.TitleWrapper}>
                         <Link to="/"><h2>Сейчас в кинотеатре</h2></Link>
                     </div>
                     <SlickSlider movies={nowPlayingMovies} />

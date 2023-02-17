@@ -4,6 +4,7 @@ import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 import Layout from './hoc/Layout/Layout';
 import MovieSearchHomePage from './pages/MovieSearchHomePage/MovieSearchHomePage';
 import PopularMoviesPage from './pages/Movies/PopularMoviesPage/PopularMoviesPage'
+import CardMoviePage from './pages/Movies/CardMoviePage/CardMoviePage';
 
 function App() {
   return (
@@ -13,6 +14,7 @@ function App() {
           <Route path="/" element={<Layout />}>
             <Route index element={<MovieSearchHomePage />} />
             <Route path="/popular-movies" element={<PopularMoviesPage />} />
+            <Route path="/card-movie/:id" element={<CardMoviePage />} />
           </Route>
           <Route path="*" element={<Navigate to={"/"} />} />
         </Routes>

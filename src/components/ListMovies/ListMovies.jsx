@@ -1,10 +1,10 @@
 import React from 'react';
-import './ListMovies.scss';
+import classes from './ListMovies.module.scss';
 import ListMoviesItem from './ListMoviesItem/ListMoviesItem';
 
 const ListMovie = ({ movies }) => {
     return (
-        <ul className="ListMovies">
+        <ul className={classes.ListMovies}>
             { movies?.map((i, index) => (
                 <ListMoviesItem
                     key={index}

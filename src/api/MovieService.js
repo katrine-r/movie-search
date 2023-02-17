@@ -61,6 +61,26 @@ class MovieService {
         }
     }
 
+    static async getMovieById(movie_id) {
+        try {
+            const response = await fetch(`${API_URL}/movie/${movie_id}?api_key=${TOKEN}&language=ru-RU`,
+                {
+                    headers: {
+                        'accept': 'application/json'
+                    }
+                }
+            )
+            const movie = (await response).json()
+            console.log("getMovieById()", movie)
+            return movie
+        }
+        catch(error) {
+            console.log("Error ", error)
+        }
+    }
+
+    // /movie/{movie_id}/credits
+
     // TV Shows requests
 
     static async getPopularTVShows() {
