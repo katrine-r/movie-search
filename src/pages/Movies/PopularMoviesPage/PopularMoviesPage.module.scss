@@ -25,5 +25,17 @@
                 color: #EA4B33;
             }
         }
+
+        .SortAndFilterWrapper {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            padding: 20px 0 30px 0;
+
+            .SelectSort {
+                padding: 5px;
+                outline: none;
+            }
+        }
     }
 }

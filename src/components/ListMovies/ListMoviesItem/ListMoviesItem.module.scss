@@ -16,6 +16,16 @@
         transform: scale(1.1);
     }
 
+    .LinkImgPoster {
+        position: relative;
+
+        .Progressbar {
+            position: absolute;
+            bottom: -25px;
+            right: 10px;
+        }
+    }
+
     .ImgPoster {
         height: 330px;
         width: 220px;

@@ -48,8 +48,20 @@
 
             .FactsMovie {
                 display: flex;
-                gap: 20px;
+                flex-direction: column;
+                gap: 30px;
                 margin-top: 10px;
+
+                .GenresList,
+                .ReleasDateAndRuntimeWrapper {
+                    display: flex;
+                    gap: 20px;
+                }
+
+                .ReleasDateAndRuntimeWrapper {
+                    align-items: center;
+                }
+
             }
 
             .Overview {
