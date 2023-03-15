@@ -34,7 +34,7 @@ class MovieService {
                 }
             )
 
-            const movies = response.json()
+            const movies = await response.json()
             console.log("getUpcomingMovies()", movies)
             return movies
         } 
@@ -52,7 +52,7 @@ class MovieService {
                     }
                 }
             )
-            const movies = response.json()
+            const movies = await response.json()
             console.log("getNowPlayingMovies()", movies)
             return movies
         }
@@ -70,7 +70,7 @@ class MovieService {
                     }
                 }
             )
-            const movie = (await response).json()
+            const movie = await response.json()
             console.log("getMovieById()", movie)
             return movie
         }
@@ -79,7 +79,39 @@ class MovieService {
         }
     }
 
-    // /movie/{movie_id}/credits
+    static async getVideosByIdMovie(movie_id) {
+        try {
+            const response = await fetch(`${API_URL}/movie/${movie_id}/videos?api_key=${TOKEN}&language=ru-RU`,
+                {
+                    headers: {
+                        'accept': 'application/json'
+                    }
+                }
+            )
+            const movie = await response.json()
+            console.log("getVideosByIdMovie", movie)
+            return movie
+        } catch(error) {
+            console.log("Error ", error)
+        }
+    }
+
+    static async getActorsByIdMovie(movie_id) {
+        try {
+            const response = await fetch(`${API_URL}/movie/${movie_id}/credits?api_key=${TOKEN}&language=ru-RU`,
+                {
+                    headers: {
+                        'accept': 'application/json'
+                    }
+                }
+            )
+            const movie = await response.json()
+            console.log("getActorsByIdMovie", movie)
+            return movie
+        } catch(error) {
+            console.log("Error ", error)
+        }
+    }
 
     // TV Shows requests
 

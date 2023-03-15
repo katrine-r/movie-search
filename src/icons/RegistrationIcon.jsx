@@ -1,6 +1,6 @@
 import React from 'react';
 
-const RegistrationIcon = ( {fill="#fff"} ) => {
+const RegistrationIcon = ({ fill="#fff" }) => {
     return (
         <svg 
             width="24" 

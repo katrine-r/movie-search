@@ -1,6 +1,6 @@
 import React from 'react';
 
-const SearchIcon = ( {fill="#fff"} ) => {
+const SearchIcon = ({ fill="#fff" }) => {
     return (
         <svg 
             width="24" 

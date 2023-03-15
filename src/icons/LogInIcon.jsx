@@ -1,6 +1,6 @@
 import React from 'react';
 
-const LogInIcon = ( {fill="#fff"} ) => {
+const LogInIcon = ({ fill="#fff" }) => {
     return (
         <svg 
             width="24" 

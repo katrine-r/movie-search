@@ -3,6 +3,10 @@ import classes from './CardMoviePage.module.scss';
 import { useParams } from 'react-router-dom';
 import MovieService from '../../../api/MovieService';
 import Progressbar from 'react-js-progressbar';
+import Modal from '../../../components/UI/Modal/Modal';
+import Player from '../../../components/UI/Player/Player';
+import CastList from '../../../components/CastList/CastList';
+import PlayArrow from '../../../icons/PlayArrow';
 
 const URL_IMAGES_SMALL = process.env.REACT_APP_URL_IMAGES_SMALL
 const URL_IMAGES_ORIGINAL = process.env.REACT_APP_URL_IMAGES_ORIGINAL
@@ -10,6 +14,9 @@ const URL_IMAGES_ORIGINAL = process.env.REACT_APP_URL_IMAGES_ORIGINAL
 const CardMoviePage = () => {
 
     const [movieById, setMovieById] = useState({})
+    const [actorsById, setActorsById] = useState({})
+    const [videoById, setVideoById] = useState()
+    const [clickWatchVideo, setClickWatchVideo] = useState(false)
     const { id } = useParams()
     console.log("useParams id", id)
 
@@ -18,8 +25,25 @@ const CardMoviePage = () => {
         setMovieById(mov)
     }
 
+    const getActorsMovie = async () => {
+        const act = await MovieService.getActorsByIdMovie(id)
+        setActorsById(act)
+    }
+
+    const onWatchVideo = async () => {
+        const mov = await MovieService.getVideosByIdMovie(id)
+        const res = mov.results[0]
+        setVideoById(res)
+        setClickWatchVideo(!clickWatchVideo)
+    }
+
+    console.log('clickWatchVideo', clickWatchVideo)
+    console.log('key videoById', videoById)
+    console.log('actorsById', actorsById)
+
     useEffect(() => {
         getActiveMovieById()
+        getActorsMovie()
     }, [])
 
     return (
@@ -63,6 +87,20 @@ const CardMoviePage = () => {
                                 </div>
                                 <span>{movieById.release_date}</span>
                                 <span>{movieById.runtime} мин.</span>
+                                <button className={classes.Button} onClick={() => onWatchVideo(id)}>
+                                    <PlayArrow />
+                                    <span className={classes.TextButton}>Смотреть трейлер</span>
+                                </button>
+                                
+                                { clickWatchVideo 
+                                    ? <Modal 
+                                        clickWatchVideo={clickWatchVideo}
+                                        setClickWatchVideo={setClickWatchVideo}
+                                      >
+                                        <Player videoById={videoById} />
+                                      </Modal>
+                                    : null
+                                }
                             </div>
                         </div>
                         <div className={classes.Overview}>
@@ -72,6 +110,8 @@ const CardMoviePage = () => {
                     </div>
                 </div>
             </div>
+
+            <CastList actorsById={actorsById} />
         </div>
     )
 }

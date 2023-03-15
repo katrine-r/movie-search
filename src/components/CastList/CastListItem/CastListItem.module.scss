@@ -1,0 +1,37 @@
+.CastListItem {
+    display: flex;
+    flex-direction: column;
+    margin: 1%;
+    margin-bottom: 20px;
+    width: 170px;
+    min-height: 255px;
+    box-sizing: border-box;
+
+    .ImgActor {
+        width: 170px;
+        border-radius: 10px;
+        box-sizing: border-box;
+    }
+
+    .NoImgActor {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 170px;
+        min-height: 255px;
+        border-radius: 10px;
+        box-sizing: border-box;
+        background-color: #999;
+    }
+
+    .NameActorWrapper {
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+        padding: 15px;
+
+        .NameActor {
+            font-weight: 700;
+        }
+    }
+}
