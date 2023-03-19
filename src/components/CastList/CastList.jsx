@@ -10,8 +10,7 @@ const CastList = ({ actorsById }) => {
                     key={index}
                     character={i.character}
                     name={i.name}
-                    profile_path={i.profile_path}
-                
+                    profile_path={i.profile_path}           
                 />
             )) }
         </ul>

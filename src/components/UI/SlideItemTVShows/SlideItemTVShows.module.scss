@@ -1,8 +1,7 @@
-.ListMovieItem {
+.SlideItemTVShows {
     display: flex;
     flex-direction: column;
-    margin: 1%;
-    margin-bottom: 20px;
+    margin: 20px 20px 20px 10px;
     width: 220px;
     min-height: 300px;
     box-sizing: border-box;
@@ -10,6 +9,7 @@
     & a {
         border-radius: 10px;
         transition: all .5s;
+        outline: none;
     }
 
     & a:hover {

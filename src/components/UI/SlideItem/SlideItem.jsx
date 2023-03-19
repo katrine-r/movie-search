@@ -2,6 +2,7 @@ import React from 'react';
 import classes from './SlideItem.module.scss';
 import { useNavigate } from 'react-router-dom';
 import Progressbar from 'react-js-progressbar';
+import Image from '../../../icons/Image';
 
 const URL_IMAGES_SMALL = process.env.REACT_APP_URL_IMAGES_SMALL
 
@@ -18,11 +19,16 @@ const SlideItem = ({
     return (
         <div className={classes.SlideItem}>
             <a onClick={() => navigate(`/card-movie/${id}`)} className={classes.LinkImgPoster}>
-                <img 
-                    className={classes.ImgPoster} 
-                    src={`${URL_IMAGES_SMALL}${poster_path}`} 
-                    alt="Poster"
-                />
+                { poster_path
+                    ? <img 
+                        className={classes.ImgPoster} 
+                        src={`${URL_IMAGES_SMALL}${poster_path}`} 
+                        alt="Poster"
+                      />
+                    : <div className={classes.NoImgPoster}>
+                        <Image width='128' height='128' />
+                      </div>
+                }
                 <div id='progressbarContainer' className={classes.Progressbar}>     
                     <Progressbar
                         input={vote_average*10}

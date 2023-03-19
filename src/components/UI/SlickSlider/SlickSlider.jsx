@@ -3,8 +3,10 @@ import Slider from 'react-slick';
 import './slick.css'; 
 import './slick-theme.css';
 import SlideItem from '../SlideItem/SlideItem';
+import SlideItemTVShows from '../SlideItemTVShows/SlideItemTVShows';
 
 const SlickSlider = ({ movies, tvShows }) => {
+
     const settings = {
         dots: false,
         infinite: true,
@@ -22,7 +24,7 @@ const SlickSlider = ({ movies, tvShows }) => {
                     slidesToShow: 4,
                     slidesToScroll: 4,
                     infinite: true,
-                    dots: true
+                    dots: false
                 }
             },
             {
@@ -31,7 +33,7 @@ const SlickSlider = ({ movies, tvShows }) => {
                     slidesToShow: 3,
                     slidesToScroll: 3,
                     infinite: true,
-                    dots: true
+                    dots: false
                 }
             },
             {
@@ -39,14 +41,16 @@ const SlickSlider = ({ movies, tvShows }) => {
                 settings: {
                     slidesToShow: 2,
                     slidesToScroll: 2,
-                    initialSlide: 2
+                    initialSlide: 2,
+                    dots: false
                 }
             },
             {
                 breakpoint: 480,
                 settings: {
                     slidesToShow: 1,
-                    slidesToScroll: 1
+                    slidesToScroll: 1,
+                    dots: false
                 }
             }
         ]
@@ -64,12 +68,12 @@ const SlickSlider = ({ movies, tvShows }) => {
                     release_date={i.release_date}
                     vote_average={i.vote_average}
                 />
-              </div>
+               </div>
             ))
           }
           { tvShows?.map((i, index) => (
               <div key={i.id}>
-                <SlideItem
+                <SlideItemTVShows
                     key={i.id}
                     id={i.id}
                     title={i.name}

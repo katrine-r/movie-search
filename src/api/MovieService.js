@@ -5,10 +5,9 @@ class MovieService {
 
     // MOVIES requests
 
-    static async getPopularMovies() {
+    static async getPopularMovies(page) {
         try {
-            // const response = await fetch(`${API_URL}/movie/popular?api_key=${TOKEN}&page=${3}`,
-            const response = await fetch(`${API_URL}/movie/popular?api_key=${TOKEN}&language=ru-RU`,
+            const response = await fetch(`${API_URL}/movie/popular?api_key=${TOKEN}&page=${page}&language=ru-RU`,
                 {
                     headers: {
                         'accept': 'application/json'
@@ -16,7 +15,7 @@ class MovieService {
                 }
             )
             const movies = await response.json()
-            console.log(movies)
+            console.log("getPopularMovies", movies)
             return movies
         }
         catch (error) {
@@ -35,7 +34,7 @@ class MovieService {
             )
 
             const movies = await response.json()
-            console.log("getUpcomingMovies()", movies)
+            console.log("getUpcomingMovies", movies)
             return movies
         } 
         catch(error) {
@@ -53,7 +52,7 @@ class MovieService {
                 }
             )
             const movies = await response.json()
-            console.log("getNowPlayingMovies()", movies)
+            console.log("getNowPlayingMovies", movies)
             return movies
         }
         catch(error) {
@@ -71,7 +70,7 @@ class MovieService {
                 }
             )
             const movie = await response.json()
-            console.log("getMovieById()", movie)
+            console.log("getMovieById", movie)
             return movie
         }
         catch(error) {
@@ -125,10 +124,61 @@ class MovieService {
                 }
             )
             const tvShows = await response.json()
-            console.log(tvShows)
+            console.log("getPopularTVShows", tvShows)
             return tvShows
         }
         catch (error) {
+            console.log("Error ", error)
+        }
+    }
+
+    static async getTVShowById(tv_id) {
+        try {
+            const response = await fetch(`${API_URL}/tv/${tv_id}?api_key=${TOKEN}&language=ru-RU`,
+                {
+                    headers: {
+                        'accept': 'application/json'
+                    }
+                }
+            )
+            const tvShow = await response.json()
+            console.log("getTVShowById", tvShow)
+            return tvShow
+        } catch(error) {
+            console.log("Error ", error)
+        }
+    }
+
+    static async getVideosByIdTVShow(tv_id) {
+        try {
+            const response = await fetch(`${API_URL}/tv/${tv_id}/videos?api_key=${TOKEN}&language=ru-RU`,
+                {
+                    headers: {
+                        'accept': 'application/json'
+                    }
+                }
+            )
+            const tvShow = await response.json()
+            console.log("getVideosByIdTVShow", tvShow)
+            return tvShow
+        } catch(error) {
+            console.log("Error ", error)
+        }
+    }
+
+    static async getActorsByIdTVShow(tv_id) {
+        try {
+            const response = await fetch(`${API_URL}/tv/${tv_id}/credits?api_key=${TOKEN}&language=ru-RU`,
+                {
+                    headers: {
+                        'accept': 'application/json'
+                    }
+                }
+            )
+            const tvShow = await response.json()
+            console.log("getActorsByIdTVShow", tvShow)
+            return tvShow
+        } catch(error) {
             console.log("Error ", error)
         }
     }

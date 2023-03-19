@@ -12,6 +12,11 @@
             flex-direction: column;
             justify-content: flex-start;
             align-items: flex-start;
+
+            .Loading {
+                display: flex;
+                justify-content: center;
+            }
         }
 
         .TitleWrapper {

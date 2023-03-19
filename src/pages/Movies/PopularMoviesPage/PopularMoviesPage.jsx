@@ -4,15 +4,22 @@ import ListMovies from '../../../components/ListMovies/ListMovies';
 import { useDispatch, useSelector } from 'react-redux';
 import MovieService from '../../../api/MovieService';
 import { getPopularMovies } from '../../../store/actions/moviesList';
+import { getArrayTotalPages } from './../../../utils'
+import classNames from 'classnames';
+import Loader from '../../../components/UI/Loader/Loader';
 
 const PopularMoviesPage = () => {
 
     const dispatch = useDispatch()
     const { popularMovies } = useSelector((state) => state.moviesList)
     const [selected, setSelected] = useState('')
+    const [currentPage, setCurrentPage] = useState(1)
+    const [totalPages, setTotalPages] = useState()
+    const [isLoading, setIsLoading] = useState(true)
 
     const onPopularMovies = async () => {
-        const mov = await MovieService.getPopularMovies()  
+        const mov = await MovieService.getPopularMovies(currentPage)  
+        setTotalPages(mov.total_pages) 
         const { results } = mov
         dispatch(getPopularMovies(results))
     }
@@ -50,7 +57,11 @@ const PopularMoviesPage = () => {
 
     useEffect( () => {
         onPopularMovies()
-    }, [])
+        setIsLoading(false)
+    }, [currentPage])
+    
+    const pages = []
+    getArrayTotalPages(pages, totalPages, currentPage)
 
     return (
         <div className={classes.PopularMoviesPage}> 
@@ -75,7 +86,31 @@ const PopularMoviesPage = () => {
                             <option value={'vote_average_up'}>По рейтингу (возрастание)</option>
                         </select>
                     </div>
-                    <ListMovies movies={popularMovies} />
+
+                    { isLoading
+                        ? <div className={classes.Loading}>
+                            <Loader />
+                          </div>
+                        : <>
+                            <ListMovies movies={popularMovies} />
+
+                            <ul className={classes.Pagination}>
+                                { pages?.map((i) => (
+                                    <li 
+                                        key={i}
+                                        className={classNames(classes.PaginationItem, {[classes.active]: currentPage === i})}
+                                        onClick={() => {
+                                            setCurrentPage(i)
+                                            window.scroll(0,0)
+                                        }}
+                                    >
+                                        {i}
+                                    </li>
+                                ))
+                                }
+                            </ul>
+                          </>
+                    }
                 </div>
             </div>  
         </div>

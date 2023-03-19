@@ -1,64 +1,52 @@
 import React, { useEffect, useState } from 'react';
-import classes from './CardMoviePage.module.scss';
+import classes from './CardTVShowPage.module.scss';
 import { useParams } from 'react-router-dom';
 import MovieService from '../../../api/MovieService';
 import Progressbar from 'react-js-progressbar';
-import Modal from '../../../components/UI/Modal/Modal';
-import Player from '../../../components/UI/Player/Player';
 import CastList from '../../../components/CastList/CastList';
-import PlayArrow from '../../../icons/PlayArrow';
 import Image from '../../../icons/Image';
 
 const URL_IMAGES_SMALL = process.env.REACT_APP_URL_IMAGES_SMALL
 const URL_IMAGES_ORIGINAL = process.env.REACT_APP_URL_IMAGES_ORIGINAL
 
-const CardMoviePage = () => {
+const CardTVShowPage = () => {
 
-    const [movieById, setMovieById] = useState({})
+    const [tvShowById, setTvShowById] = useState({})
     const [actorsById, setActorsById] = useState({})
-    const [videoById, setVideoById] = useState()
-    const [clickWatchVideo, setClickWatchVideo] = useState(false)
     const { id } = useParams()
 
-    const getActiveMovieById = async () => {
-        const mov = await MovieService.getMovieById(id)
-        setMovieById(mov)
+    const getActiveTVShowById = async () => {
+        const tv = await MovieService.getTVShowById(id)
+        setTvShowById(tv)
     }
 
-    const getActorsMovie = async () => {
-        const act = await MovieService.getActorsByIdMovie(id)
+    const getActorsTVShow = async () => {
+        const act = await MovieService.getActorsByIdTVShow(id)
         setActorsById(act)
     }
 
-    const onWatchVideo = async () => {
-        const mov = await MovieService.getVideosByIdMovie(id)
-        const res = mov.results[0]
-        setVideoById(res)
-        setClickWatchVideo(!clickWatchVideo)
-    }
-
     useEffect(() => {
-        getActiveMovieById()
-        getActorsMovie()
+        getActiveTVShowById()
+        getActorsTVShow()
     }, [])
 
     return (
-        <div className={classes.CardMoviePage}>
+        <div className={classes.CardTVShowPage}>
             <div className={classes.ImgPosterContainer}>
-                { movieById.backdrop_path
+                { tvShowById.backdrop_path
                     ? <img 
                         className={classes.ImgPosterBackground} 
-                        src={`${URL_IMAGES_ORIGINAL}${movieById.backdrop_path}`} 
+                        src={`${URL_IMAGES_ORIGINAL}${tvShowById.backdrop_path}`} 
                         alt="Poster" 
                       />
                     : <div className={classes.NoImgPosterBackground}></div>
                 }
                 <div className={classes.ShortDescriptionCard}>
                     <div>
-                        { movieById.poster_path
+                        { tvShowById.poster_path
                             ? <img 
                                 className={classes.ImgPoster} 
-                                src={`${URL_IMAGES_SMALL}${movieById.poster_path}`} 
+                                src={`${URL_IMAGES_SMALL}${tvShowById.poster_path}`} 
                                 alt="Poster" 
                               />
                             : <div className={classes.NoImgPoster}>
@@ -67,10 +55,10 @@ const CardMoviePage = () => {
                         }
                     </div>
                     <div className={classes.Description}>
-                        <h1>{movieById.title}</h1>
+                        <h1>{tvShowById.name}</h1>
                         <div className={classes.FactsMovie}>
                             <ul className={classes.GenresList}>
-                                { movieById?.genres?.map((i, index) => (
+                                { tvShowById?.genres?.map((i, index) => (
                                     <li key={index} id={i.id} name={i.name}>
                                         {i.name}
                                     </li>
@@ -80,7 +68,7 @@ const CardMoviePage = () => {
                             <div className={classes.ReleasDateAndRuntimeWrapper}>
                                 <div id='progressbarContainer'>                                    
                                     <Progressbar
-                                        input={movieById.vote_average*10}
+                                        input={tvShowById.vote_average*10}
                                         pathWidth={20}
                                         pathColor={['#56ab2f', '#a8e063']}
                                         trailWidth={30}
@@ -89,27 +77,20 @@ const CardMoviePage = () => {
                                         size={60}
                                     />
                                 </div>
-                                <span>{movieById.release_date}</span>
-                                <span>{movieById.runtime} мин.</span>
-                                <button className={classes.Button} onClick={() => onWatchVideo(id)}>
-                                    <PlayArrow />
-                                    <span className={classes.TextButton}>Смотреть трейлер</span>
-                                </button>
-                                
-                                { clickWatchVideo 
-                                    ? <Modal 
-                                        clickWatchVideo={clickWatchVideo}
-                                        setClickWatchVideo={setClickWatchVideo}
-                                      >
-                                        <Player videoById={videoById} />
-                                      </Modal>
+                                <span>{tvShowById.release_date}</span>
+                                { tvShowById.number_of_seasons
+                                    ? <span>{tvShowById.number_of_seasons} сезон</span>
+                                    : null
+                                }
+                                { tvShowById.episode_run_time > 0
+                                    ? <span>{tvShowById.episode_run_time} мин.</span>
                                     : null
                                 }
                             </div>
                         </div>
                         <div className={classes.Overview}>
                             <h3>Обзор</h3>
-                            <p>{movieById.overview}</p>
+                            <p>{tvShowById.overview}</p>
                         </div>
                     </div>
                 </div>
@@ -120,4 +101,4 @@ const CardMoviePage = () => {
     )
 }
 
-export default CardMoviePage
+export default CardTVShowPage

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import classes from './MovieSearchHomePage.module.scss';
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
@@ -7,12 +7,14 @@ import MovieService from '../../api/MovieService';
 import SlickSlider from '../../components/UI/SlickSlider/SlickSlider';
 import { getNowPlayingMovies, getPopularMovies, getUpcomingMovies } from '../../store/actions/moviesList';
 import { getPopularTVShows } from '../../store/actions/tvShowsList';
+import Loader from '../../components/UI/Loader/Loader';
 
 const MovieSearch = () => {
 
     const dispatch = useDispatch()
     const { popularMovies, upcomingMovies, nowPlayingMovies } = useSelector((state) => state.moviesList)
     const { popularTVShows } = useSelector((state) => state.tvShowsList)
+    const [isLoading, setIsLoading] = useState(true)
 
     const onPopularMovies = async () => {
         const mov = await MovieService.getPopularMovies()  
@@ -49,33 +51,39 @@ const MovieSearch = () => {
         onPopularTVShows()
         onUpcomingMovies()
         onNowPlayingMovies()
+        setIsLoading(false)
     }, [])
 
     return (
         <div className={classes.MovieSearch}>
             <div className={classes.MovieWrapper}>
                 <div className={classes.PopularMovies}>
+                    { isLoading
+                        ? <div className={classes.Loading}>
+                            <Loader />
+                          </div>
+                        : <>
+                            <div className={classes.TitleWrapper}>
+                                <Link to="/popular-movies"><h2>Популярные фильмы</h2></Link>
+                            </div>
+                            <SlickSlider movies={popularMovies} />
 
-                    <div className={classes.TitleWrapper}>
-                        <Link to="/popular-movies"><h2>Популярные фильмы</h2></Link>
-                    </div>
-                    <SlickSlider movies={popularMovies} />
+                            <div className={classes.TitleWrapper}>
+                                <Link to="/"><h2>Популярные сериалы</h2></Link>
+                            </div>
+                            <SlickSlider tvShows={popularTVShows} />
 
-                    <div className={classes.TitleWrapper}>
-                        <Link to="/"><h2>Популярные сериалы</h2></Link>
-                    </div>
-                    <SlickSlider tvShows={popularTVShows} />
+                            <div className={classes.TitleWrapper}>
+                                <Link to="/"><h2>Скоро в прокате</h2></Link>
+                            </div>
+                            <SlickSlider movies={upcomingMovies} />
 
-                    <div className={classes.TitleWrapper}>
-                        <Link to="/"><h2>Скоро в прокате</h2></Link>
-                    </div>
-                    <SlickSlider movies={upcomingMovies} />
-
-                    <div className={classes.TitleWrapper}>
-                        <Link to="/"><h2>Сейчас в кинотеатре</h2></Link>
-                    </div>
-                    <SlickSlider movies={nowPlayingMovies} />
-
+                            <div className={classes.TitleWrapper}>
+                                <Link to="/"><h2>Сейчас в кинотеатре</h2></Link>
+                            </div>
+                            <SlickSlider movies={nowPlayingMovies} />
+                          </>
+                    }
                 </div>
             </div>  
         </div>

@@ -1,12 +1,12 @@
 import React from 'react';
-import classes from './ListMoviesItem.module.scss';
+import classes from './SlideItemTVShows.module.scss';
 import { useNavigate } from 'react-router-dom';
 import Progressbar from 'react-js-progressbar';
 import Image from '../../../icons/Image';
 
 const URL_IMAGES_SMALL = process.env.REACT_APP_URL_IMAGES_SMALL
 
-const ListMovieItem = ({ 
+const SlideItemTVShows = ({ 
     id,
     title,
     poster_path,
@@ -17,13 +17,13 @@ const ListMovieItem = ({
     const navigate = useNavigate()
 
     return (
-        <li className={classes.ListMovieItem}>
-            <a onClick={() => navigate(`/card-movie/${id}`)} className={classes.LinkImgPoster}>
+        <div className={classes.SlideItemTVShows}>
+            <a onClick={() => navigate(`/card-tv-show/${id}`)} className={classes.LinkImgPoster}>
                 { poster_path
                     ? <img 
                         className={classes.ImgPoster} 
                         src={`${URL_IMAGES_SMALL}${poster_path}`} 
-                        alt="Poster" 
+                        alt="Poster"
                       />
                     : <div className={classes.NoImgPoster}>
                         <Image width='128' height='128' />
@@ -42,14 +42,12 @@ const ListMovieItem = ({
                     />            
                 </div>
             </a>
-            
             <div className={classes.ItemContent}>
-                <a onClick={() => navigate(`/card-movie/${id}`)}><h3>{title}</h3></a>
-                <p>{release_date}</p>    
-                <p>{vote_average}</p>    
+                <a onClick={() => navigate(`/card-tv-show/${id}`)}><h3>{title}</h3></a>
+                <p>{release_date}</p>
             </div>
-        </li>       
+        </div>
     )
  }
 
-export default ListMovieItem
+export default SlideItemTVShows
