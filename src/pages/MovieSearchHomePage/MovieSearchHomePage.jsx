@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import classes from './MovieSearchHomePage.module.scss';
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
@@ -15,6 +15,8 @@ const MovieSearch = () => {
     const dispatch = useDispatch()
     const { popularMovies, upcomingMovies, nowPlayingMovies } = useSelector((state) => state.moviesList)
     const { popularTVShows } = useSelector((state) => state.tvShowsList)
+    const [currentPage, setCurrentPage] = useState(1)
+    const [selected, setSelected] = useState('popularity.desc')
     const [fetching, isLoading, error] = useFetching(() => {
         onPopularMovies()
         onPopularTVShows()
@@ -23,7 +25,7 @@ const MovieSearch = () => {
     })
 
     const onPopularMovies = async () => {
-        const mov = await MovieService.getPopularMovies()  
+        const mov = await MovieService.getPopularMovies(currentPage, selected)  
         const { results } = mov
         dispatch(getPopularMovies(results))
         console.log(results)

@@ -5,9 +5,9 @@ class MovieService {
 
     // MOVIES requests
 
-    static async getPopularMovies(page) {
+    static async getPopularMovies(page, sort) {
         try {
-            const response = await fetch(`${API_URL}/movie/popular?api_key=${TOKEN}&page=${page}&language=ru-RU`,
+            const response = await fetch(`${API_URL}/discover/movie/?api_key=${TOKEN}&sort_by=${sort}&page=${page}&language=ru-RU`,
                 {
                     headers: {
                         'accept': 'application/json'

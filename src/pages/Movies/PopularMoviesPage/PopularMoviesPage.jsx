@@ -15,7 +15,7 @@ const PopularMoviesPage = () => {
 
     const dispatch = useDispatch()
     const { popularMovies } = useSelector((state) => state.moviesList)
-    const [selected, setSelected] = useState('')
+    const [selected, setSelected] = useState('popularity.desc')
     const [currentPage, setCurrentPage] = useState(1)
     const [totalPages, setTotalPages] = useState()
     const [fetching, isLoading, error] = useFetching(() => {
@@ -23,46 +23,15 @@ const PopularMoviesPage = () => {
     })
 
     const onPopularMovies = async () => {
-        const mov = await MovieService.getPopularMovies(currentPage)  
+        const mov = await MovieService.getPopularMovies(currentPage, selected)  
         setTotalPages(mov.total_pages) 
         const { results } = mov
         dispatch(getPopularMovies(results))
     }
 
-    const selectSort = ev => {
-        setSelected(ev.target.value)
-        if (ev.target.value === 'popularity_down') {
-            dispatch(getPopularMovies([
-                ...popularMovies.sort((a,b) => {
-                    return b.popularity - a.popularity
-                })
-            ]))
-        } else if (ev.target.value === 'popularity_up') {
-            dispatch(getPopularMovies([
-                ...popularMovies.sort((a,b) => {
-                    return a.popularity - b.popularity
-                })
-            ]))
-        }
-
-        if (ev.target.value === 'vote_average_down') {
-            dispatch(getPopularMovies([
-                ...popularMovies.sort((a,b) => {
-                    return b.vote_average - a.vote_average
-                })
-            ]))
-        } else if (ev.target.value === 'vote_average_up') {
-            dispatch(getPopularMovies([
-                ...popularMovies.sort((a,b) => {
-                    return a.vote_average - b.vote_average
-                })
-            ]))
-        }
-    }
-
     useEffect(() => {
         fetching()
-    }, [currentPage])
+    }, [currentPage, selected])
     
     const pages = []
     getArrayTotalPages(pages, totalPages, currentPage)
@@ -96,13 +65,17 @@ const PopularMoviesPage = () => {
                             name="sort-movies" 
                             id="sort-movies"
                             value={selected}
-                            onChange={selectSort}
+                            onChange={(ev) => setSelected(ev.target.value)}
                         >
                             <option value="">Сортировать по...</option>
-                            <option value={'popularity_down'}>По популярности (убывание)</option>
-                            <option value={'popularity_up'}>По популярности (возрастание)</option>
-                            <option value={'vote_average_down'}>По рейтингу (убывание)</option>
-                            <option value={'vote_average_up'}>По рейтингу (возрастание)</option>
+                            <option value={'popularity.desc'}>По популярности (убывание)</option>
+                            <option value={'popularity.asc'}>По популярности (возрастание)</option>
+                            <option value={'vote_average.desc'}>По рейтингу (убывание)</option>
+                            <option value={'vote_average.asc'}>По рейтингу (возрастание)</option>
+                            <option value={'release_date.desc'}>По дате выпуска (убывание)</option>
+                            <option value={'release_date.asc'}>По дате выпуска (возрастание)</option>
+                            <option value={'original_title.desc'}>По названию (убывание)</option>
+                            <option value={'original_title.asc'}>По названию (возрастание)</option>
                         </select>
                     </div>
 
