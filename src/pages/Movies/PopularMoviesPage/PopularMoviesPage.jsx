@@ -7,6 +7,9 @@ import { getPopularMovies } from '../../../store/actions/moviesList';
 import { getArrayTotalPages } from './../../../utils'
 import classNames from 'classnames';
 import Loader from '../../../components/UI/Loader/Loader';
+import { useFetching } from '../../../hooks/useFetching';
+import ArrowBack from '../../../icons/ArrowBack';
+import ArrowForward from '../../../icons/ArrowForward';
 
 const PopularMoviesPage = () => {
 
@@ -15,7 +18,9 @@ const PopularMoviesPage = () => {
     const [selected, setSelected] = useState('')
     const [currentPage, setCurrentPage] = useState(1)
     const [totalPages, setTotalPages] = useState()
-    const [isLoading, setIsLoading] = useState(true)
+    const [fetching, isLoading, error] = useFetching(() => {
+        onPopularMovies()
+    })
 
     const onPopularMovies = async () => {
         const mov = await MovieService.getPopularMovies(currentPage)  
@@ -55,13 +60,27 @@ const PopularMoviesPage = () => {
         }
     }
 
-    useEffect( () => {
-        onPopularMovies()
-        setIsLoading(false)
+    useEffect(() => {
+        fetching()
     }, [currentPage])
     
     const pages = []
     getArrayTotalPages(pages, totalPages, currentPage)
+    console.log(pages)
+
+    const prevPage = () => {
+        if (currentPage > 1) {
+            setCurrentPage(currentPage - 1)
+            window.scroll(0,0)
+        }
+    }
+
+    const nextPage = () => {
+        if (currentPage < totalPages) {
+            setCurrentPage(currentPage + 1)
+            window.scroll(0,0)
+        }
+    }
 
     return (
         <div className={classes.PopularMoviesPage}> 
@@ -93,8 +112,15 @@ const PopularMoviesPage = () => {
                           </div>
                         : <>
                             <ListMovies movies={popularMovies} />
-
+                        
                             <ul className={classes.Pagination}>
+                                <button 
+                                    onClick={() => prevPage()} 
+                                    className={classNames(classes.ButtonsPagination, 
+                                        {[classes.DisabledButton]: currentPage === 1})}
+                                >
+                                    <ArrowBack />
+                                </button>
                                 { pages?.map((i) => (
                                     <li 
                                         key={i}
@@ -108,6 +134,13 @@ const PopularMoviesPage = () => {
                                     </li>
                                 ))
                                 }
+                                <button 
+                                    onClick={() => nextPage()} 
+                                    className={classNames(classes.ButtonsPagination, 
+                                        {[classes.DisabledButton]: currentPage === totalPages})}
+                                >
+                                    <ArrowForward />
+                                </button>
                             </ul>
                           </>
                     }

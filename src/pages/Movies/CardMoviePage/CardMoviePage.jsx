@@ -8,6 +8,7 @@ import Player from '../../../components/UI/Player/Player';
 import CastList from '../../../components/CastList/CastList';
 import PlayArrow from '../../../icons/PlayArrow';
 import Image from '../../../icons/Image';
+import { useFetching } from '../../../hooks/useFetching';
 
 const URL_IMAGES_SMALL = process.env.REACT_APP_URL_IMAGES_SMALL
 const URL_IMAGES_ORIGINAL = process.env.REACT_APP_URL_IMAGES_ORIGINAL
@@ -18,6 +19,10 @@ const CardMoviePage = () => {
     const [actorsById, setActorsById] = useState({})
     const [videoById, setVideoById] = useState()
     const [clickWatchVideo, setClickWatchVideo] = useState(false)
+    const [fetching, isLoading, error] = useFetching(() => {
+        getActiveMovieById()
+        getActorsMovie()
+    })
     const { id } = useParams()
 
     const getActiveMovieById = async () => {
@@ -38,13 +43,13 @@ const CardMoviePage = () => {
     }
 
     useEffect(() => {
-        getActiveMovieById()
-        getActorsMovie()
+        fetching()
     }, [])
 
     return (
         <div className={classes.CardMoviePage}>
             <div className={classes.ImgPosterContainer}>
+        
                 { movieById.backdrop_path
                     ? <img 
                         className={classes.ImgPosterBackground} 
@@ -53,6 +58,7 @@ const CardMoviePage = () => {
                       />
                     : <div className={classes.NoImgPosterBackground}></div>
                 }
+
                 <div className={classes.ShortDescriptionCard}>
                     <div>
                         { movieById.poster_path

@@ -48,6 +48,26 @@
                 flex-direction: row;
                 box-sizing: border-box;
 
+                .ButtonsPagination {
+                    background: none;
+                    border: none;
+
+                    &:hover {
+                        opacity: .5;
+                        outline: none;
+                        cursor: pointer;
+                    }
+                }
+
+                .DisabledButton {
+                    opacity: .5;
+                    outline: none;
+
+                    &:hover {
+                        cursor: auto;
+                    }
+                }
+
                 .PaginationItem {
                     padding: 10px;
                     border: 1px solid #15151A;

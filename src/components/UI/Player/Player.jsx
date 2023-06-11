@@ -14,6 +14,7 @@ const Player = ({ videoById }) => {
                     playerVars: { 
                         enablejsapi: 1,
                         origin: window.location.origin,
+                        // origin: window.location.hostname,
                         host: 'https://www.youtube.com'
                     }
                 }
